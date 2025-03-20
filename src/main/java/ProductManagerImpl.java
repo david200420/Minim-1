@@ -25,12 +25,13 @@ public class ProductManagerImpl implements ProductManager {
     public ProductManagerImpl() {
         productList = new ArrayList<>();
         orderQueue = new LinkedList<>();
+        users = new HashMap<>();
     }
 
     @Override
     public void addProduct(String id, String name, double price) {
         logger.info("Adding product with id " + id + " and name " + name);
-        productList.add(new Product(1, name));
+        productList.add(new Product(id, name, price));
 
     }
 
@@ -44,6 +45,7 @@ public class ProductManagerImpl implements ProductManager {
     @Override
     public void addOrder(Order order) {
         orderQueue.add(order);
+        users.put(order.getUser(),order.getUser1());
     }
 
     @Override
@@ -57,18 +59,27 @@ public class ProductManagerImpl implements ProductManager {
         return order;
     }
 
+    public Order deliverOrder1(String name) {
+        for (Order order : orderQueue) {
+            if (order.getUser().equals(name)) {
+                return order; // Devuelve la orden si el usuario coincide
+            }
+        }
+        return null; // Si no encuentra ninguna orden con ese usuario
+    }
+
     @Override
-        public Product getProduct (String c1) {
+    public Product getProduct(String c1) {
             for (Product p : this.productList) {
-                if (p.getNom().equals(c1)) {
-                return p;
+                if (p.getId().equals(c1)) {
+                    return p;
                 }
             }
             return null;
-        }
+    }
 
     @Override
     public User getUser(String number) {
-        return null;
+        return users.get(number);
     }
 }

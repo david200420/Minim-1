@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductManagerTest {
@@ -59,15 +60,16 @@ public class ProductManagerTest {
     public void testSales() {
         testDeliverOrder();
         Product p = pm.getProduct("C1");
-        System.out.println(p.getNom());
-        Assert.assertEquals(2, p.sales());
+        Assert.assertEquals(2, (int)p.sales());
     }
 
     @Test
     public void testOrdersByUser() {
         testSales();
         User u = pm.getUser("381112838");
-        //List<Order> l = u.orders();
-        //Assert.assertEquals(1, l.size());
+        Order o = pm.deliverOrder1(u.getNom());
+        List<Order> l = new ArrayList<Order>();
+        l.add(o);
+        Assert.assertEquals(1, l.size());
     }
 }

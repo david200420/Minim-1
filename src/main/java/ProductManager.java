@@ -5,7 +5,7 @@ import models.User;
 import java.util.List;
 
 public interface ProductManager {
-
+    public Order deliverOrder1(String name);
     public void addProduct(String id, String name, double price);
 
     public List<Product> getProductsByPrice();

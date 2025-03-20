@@ -12,9 +12,12 @@ public class Order {
         this.user = new User(0,dni); // pasa de string a int
         this.pedido = new ArrayList<>(); //Importante inicializar la lista pq si no se tendra que crear en el test y no lo hace
     }
+    public int getId() {
+        return id;
+    }
 
     public void addLP(int i, String s) {
-        Product p = new Product(i ,s);
+        Product p = new Product(i,s);
         this.pedido.add(p);
     }
     public String getLP(int i){
@@ -22,5 +25,8 @@ public class Order {
     }
     public String getUser() {
         return user.getNom();
+    }
+    public User getUser1() {
+        return this.user;
     }
 }
